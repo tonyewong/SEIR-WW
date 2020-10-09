@@ -1,5 +1,7 @@
 # SEIR-Wastewater
 
+![SEIR model schematic](https://github.com/tonyewong/SEIR-WW/blob/master/figures/model_schematic.png)
+
 ## Purpose
 
 In the wake of COVID-19, college campus reopening (and stay-open) plans rely on adequate surveillance testing
@@ -7,7 +9,7 @@ protocols to detect and remove infectious individuals from the circulating popul
 potential outbreaks. The model here builds on that of [Paltiel et al.
 (2020)](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2768923) by including (i) a wastewater
 surveillance module and (ii) a noncompliance parameter to modulate the rate at which individuals enter
-quarantine/isolation after either developing symptoms or testing positive.
+quarantine/isolation after either developing symptoms or testing positive. A model schematic is shown above.
 
 This repository contains codes, input files, and output files for the SEIR modeling analysis describes in the manuscript [Evaluating the Sensitivity of SARS-CoV-2 Infection Rates on College Campuses to Wastewater Surveillance](preprint url here).
 
@@ -29,8 +31,8 @@ Here, we describe the workflow to reproduce the work described in the manuscript
 
 Note that many files have a `setwd()` command at the beginning to change the working directory to the `R` directory within this code repository. For example:
 ```
-if (Sys.info()["user"]=="tony") {setwd("/Users/tony/Google Drive (aewsma@g.rit.edu)/research/covid/seir_ww/R")}
-if (Sys.info()["user"]=="aewsma") {setwd("/Users/aewsma/Google Drive/research/covid/seir_ww/R")}
+if (Sys.info()["user"]=="tony") {setwd("/Users/tony/codes/SEIR-WW/R")}
+if (Sys.info()["user"]=="aewsma") {setwd("/Users/aewsma/codes/SEIR-WW/R")}
 ```
 (The `if` statements are because I would run these codes on both my work and personal computer.) You will need to change this to match your own directory structure. If you aren't sure what this should look like, open R and navigate to the `R` directory from these codes. Then enter the command `getwd()` in R. Copy-paste the result into the quotes within the `setwd()` command. If you only have one computer that you're using because you have a healthier work-life balance than me, then you could get rid of the `if` statements and change the above to:
 ```
