@@ -1,3 +1,4 @@
+figures/
 risk_results_SOM_29Sep2020.RData
 seir_ensemble_risk_SOM.R
 seir_ensemble_tradeoff-infections-tests.R
