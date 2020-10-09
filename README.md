@@ -31,8 +31,8 @@ Here, we describe the workflow to reproduce the work described in the manuscript
 
 Note that many files have a `setwd()` command at the beginning to change the working directory to the `R` directory within this code repository. For example:
 ```
-if (Sys.info()["user"]=="tony") {setwd("/Users/tony/Google Drive (aewsma@g.rit.edu)/research/covid/seir_ww/R")}
-if (Sys.info()["user"]=="aewsma") {setwd("/Users/aewsma/Google Drive/research/covid/seir_ww/R")}
+if (Sys.info()["user"]=="tony") {setwd("/Users/tony/codes/SEIR-WW/R")}
+if (Sys.info()["user"]=="aewsma") {setwd("/Users/aewsma/codes/SEIR-WW/R")}
 ```
 (The `if` statements are because I would run these codes on both my work and personal computer.) You will need to change this to match your own directory structure. If you aren't sure what this should look like, open R and navigate to the `R` directory from these codes. Then enter the command `getwd()` in R. Copy-paste the result into the quotes within the `setwd()` command. If you only have one computer that you're using because you have a healthier work-life balance than me, then you could get rid of the `if` statements and change the above to:
 ```
