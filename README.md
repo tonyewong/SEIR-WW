@@ -1,6 +1,6 @@
 # SEIR-Wastewater
 
-![](./figures/model_schematic.png =400x)
+![SEIR model schematic](https://github.com/tonyewong/SEIR-WW/blob/master/figures/model_schematic.png)
 
 ## Purpose
 
