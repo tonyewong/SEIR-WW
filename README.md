@@ -1,5 +1,7 @@
 # SEIR-Wastewater
 
+![](./figures/model_schematic.png =400x)
+
 ## Purpose
 
 In the wake of COVID-19, college campus reopening (and stay-open) plans rely on adequate surveillance testing
@@ -7,7 +9,7 @@ protocols to detect and remove infectious individuals from the circulating popul
 potential outbreaks. The model here builds on that of [Paltiel et al.
 (2020)](https://jamanetwork.com/journals/jamanetworkopen/fullarticle/2768923) by including (i) a wastewater
 surveillance module and (ii) a noncompliance parameter to modulate the rate at which individuals enter
-quarantine/isolation after either developing symptoms or testing positive.
+quarantine/isolation after either developing symptoms or testing positive. A model schematic is shown above.
 
 This repository contains codes, input files, and output files for the SEIR modeling analysis describes in the manuscript [Evaluating the Sensitivity of SARS-CoV-2 Infection Rates on College Campuses to Wastewater Surveillance](preprint url here).
 
