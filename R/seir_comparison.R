@@ -101,8 +101,8 @@ idx_to_plot <- match(days_to_plot, days)
 
 pdf('../figures/comparison.pdf',width=6,height=7, colormodel='cmyk', pointsize=11)
 par(mfrow=c(3,2), mai=c(.3,.8,.6,.02), las=0)
-# plot of control simulations actual (A+S+TP) and detected (FP+S+TP) infections
-# --- PANEL A --- ctrl-WW detected infections
+# plot of control simulations actual (A+S+TP) and perceived (FP+S+TP) infections
+# --- PANEL A --- ctrl-WW perceived infections
 mm <- 1
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,120), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -110,11 +110,11 @@ mtext(side=1, text="Day", line=2.2, cex=0.8)
 mtext(side=2, text="Count", line=2.2, cex=0.8)
 mtext(side=2, text="Control", line=4.6, cex=.9)
 mtext(side=3, text=panel_labels[1], line=0, cex=1, adj=0);
-mtext(side=3, text="Current actual and detected\ninfection count", line=1.9, cex=.9);
+mtext(side=3, text="Current actual and perceived\ninfection count", line=1.9, cex=.9);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -123,7 +123,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(1,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,10,"Exogenous infections")
-legend(-1, 123, legend=c("Detected infections, wastewater surv.","Actual infections, wastewater surv.","Detected infections, traditional surv.","Actual infections, traditional surv."),
+legend(-1, 123, legend=c("Perceived infections, wastewater surv.","Actual infections, wastewater surv.","Perceived infections, traditional surv.","Actual infections, traditional surv."),
        lty=c(5,1,5,1), col=plot_colors[c(1,1,5,5)], lwd=1.5, bty="n")
 # --- PANEL B --- plot of breakdown of isolation unit individuals
 par(mai=c(.3,.32,.6,.5))
@@ -133,7 +133,7 @@ lines(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]
       type='l', lwd=1.5, lty=5, col="black")
 mtext(side=1, text="Day", line=2.2, cex=0.8)
 mtext(side=3, text=panel_labels[2], line=0, cex=1, adj=0);
-mtext(side=3, text="Breakdown of actual and\ndetected infections", line=1.9, cex=.9);
+mtext(side=3, text="Breakdown of actual and\nperceived infections", line=1.9, cex=.9);
 for (ii in 1:length(days_to_plot)) {
     idx <- idx_to_plot[ii]
     ## ACTUAL infections
@@ -153,7 +153,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+7,idx_to_plot[ii]+1,idx_to_plot[ii]+1,idx_to_plot[ii]+7)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -173,12 +173,12 @@ for (ii in 1:length(days_to_plot)) {
 }
 legend(-1, 123, legend=c("Symptomatic","True positive","Asymptomatic","False positive"),
        pch=c(15,15,15,15), col=plot_colors[c(2,6,4,7)], bty="n")
-# add arrows to denote actual and detected infections
+# add arrows to denote actual and perceived infections
 text(60,90,"Actual"); arrows(x0=65, y0=85.5, x1=68.7, y1=62.5, length=0.05, code=2)
-text(81,83,"Detected"); arrows(x0=75, y0=78, x1=71.5, y1=42.5, length=0.05, code=2)
+text(81,83,"Perceived"); arrows(x0=75, y0=78, x1=71.5, y1=42.5, length=0.05, code=2)
 # same, but for moderate scenario
 mm <- 3
-# --- PANEL C --- ctrl-WW detected infections
+# --- PANEL C --- ctrl-WW perceived infections
 par(mai=c(.4,.8,.5,.02))
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,180), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -189,7 +189,7 @@ mtext(side=3, text=panel_labels[3], line=0, cex=1, adj=0);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -198,7 +198,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(1.5,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,15,"Exogenous infections")
-#legend(0, 112, legend=c("detected infections with wastewater surv.","Actual infections with wastewater surv.","detected infections with traditional surv.","Actual infections with traditional surv."),
+#legend(0, 112, legend=c("perceived infections with wastewater surv.","Actual infections with wastewater surv.","perceived infections with traditional surv.","Actual infections with traditional surv."),
 #       lty=c(1,2,1,2), col=plot_colors[c(2,2,5,5)], lwd=1.5, bty="n")
 # --- PANEL D --- plot of breakdown of isolation unit individuals
 par(mai=c(.4,.32,.5,.5))
@@ -227,7 +227,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+7,idx_to_plot[ii]+1,idx_to_plot[ii]+1,idx_to_plot[ii]+7)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -247,7 +247,7 @@ for (ii in 1:length(days_to_plot)) {
 }
 # same, but for severe scenario
 mm <- 5
-# --- PANEL E --- ctrl-WW detected infections
+# --- PANEL E --- ctrl-WW perceived infections
 par(mai=c(.5,.8,.4,.02))
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,900), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -258,7 +258,7 @@ mtext(side=3, text=panel_labels[5], line=0, cex=1, adj=0);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -267,7 +267,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(7.5,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,75,"Exogenous infections")
-#legend(0, 112, legend=c("detected infections with wastewater surv.","Actual infections with wastewater surv.","detected infections with traditional surv.","Actual infections with traditional surv."),
+#legend(0, 112, legend=c("perceived infections with wastewater surv.","Actual infections with wastewater surv.","perceived infections with traditional surv.","Actual infections with traditional surv."),
 #       lty=c(1,2,1,2), col=plot_colors[c(2,2,5,5)], lwd=1.5, bty="n")
 # --- PANEL F --- plot of breakdown of isolation unit individuals
 par(mai=c(.5,.32,.4,.5))
@@ -296,7 +296,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+7,idx_to_plot[ii]+1,idx_to_plot[ii]+1,idx_to_plot[ii]+7)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -326,8 +326,8 @@ idx_to_plot <- match(days_to_plot, days)
 
 pdf('../figures/comparison_both.pdf',width=6,height=7, colormodel='cmyk', pointsize=11)
 par(mfrow=c(3,2), mai=c(.3,.8,.6,.02), las=0)
-# plot of control simulations actual (A+S+TP) and detected (FP+S+TP) infections
-# --- PANEL A --- ctrl-WW detected infections
+# plot of control simulations actual (A+S+TP) and perceived (FP+S+TP) infections
+# --- PANEL A --- ctrl-WW perceived infections
 mm <- 1
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,120), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -335,11 +335,11 @@ mtext(side=1, text="Day", line=2.2, cex=0.8)
 mtext(side=2, text="Count", line=2.2, cex=0.8)
 mtext(side=2, text="Control", line=4.6, cex=.9)
 mtext(side=3, text=panel_labels[1], line=0, cex=1, adj=0);
-mtext(side=3, text="Current actual and detected\ninfection count", line=1.9, cex=.9);
+mtext(side=3, text="Current actual and perceived\ninfection count", line=1.9, cex=.9);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -348,7 +348,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(1,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,10,"Exogenous infections")
-legend(-1, 123, legend=c("Detected infections, wastewater surv.","Actual infections, wastewater surv.","Detected infections, traditional surv.","Actual infections, traditional surv."),
+legend(-1, 123, legend=c("Perceived infections, wastewater surv.","Actual infections, wastewater surv.","Perceived infections, traditional surv.","Actual infections, traditional surv."),
        lty=c(5,1,5,1), col=plot_colors[c(1,1,5,5)], lwd=1.5, bty="n")
 # --- PANEL B --- plot of breakdown of isolation unit individuals
 par(mai=c(.3,.32,.6,.5))
@@ -362,7 +362,7 @@ lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positi
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 mtext(side=1, text="Day", line=2.2, cex=0.8)
 mtext(side=3, text=panel_labels[2], line=0, cex=1, adj=0);
-mtext(side=3, text="Breakdown of actual and\ndetected infections", line=1.9, cex=.9);
+mtext(side=3, text="Breakdown of actual and\nperceived infections", line=1.9, cex=.9);
 for (ii in 1:length(days_to_plot)) {
     idx <- idx_to_plot[ii]
     ### WASTEWATER SURVEILLANCE
@@ -383,7 +383,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+9,idx_to_plot[ii]+15,idx_to_plot[ii]+15,idx_to_plot[ii]+9)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -419,7 +419,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"],
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]-15,idx_to_plot[ii]-9,idx_to_plot[ii]-9,idx_to_plot[ii]-15)],
             y=c(model_out[[mm+1]][idx,"Symptoms"],model_out[[mm+1]][idx,"Symptoms"],0,0),
@@ -439,13 +439,13 @@ for (ii in 1:length(days_to_plot)) {
 }
 legend(-1, 123, legend=c("Symptomatic","True positive","Asymptomatic","False positive"),
        pch=c(15,15,15,15), col=plot_colors[c(2,6,4,7)], bty="n")
-# add arrows to denote actual and detected infections
+# add arrows to denote actual and perceived infections
 text(84,109,"Actual"); arrows(x0=83.4, y0=105, x1=78.5, y1=61.2, length=0.04, code=2); arrows(x0=83.4, y0=105, x1=81.2, y1=62.5, length=0.04, code=2)
-text(95,93,"Detected"); arrows(x0=88, y0=89, x1=84, y1=43.5, length=0.04, code=2); arrows(x0=88, y0=89, x1=77, y1=74, length=0.04, code=2)
+text(95,93,"Perceived"); arrows(x0=88, y0=89, x1=84, y1=43.5, length=0.04, code=2); arrows(x0=88, y0=89, x1=77, y1=74, length=0.04, code=2)
 text(55, 99, "Trad."); arrows(x0=57.4, y0=95, x1=57.4, y1=72, length=0.05, angle=90, code=2)
 text(65, 87, "WW"); arrows(x0=62.6, y0=83, x1=62.6, y1=63, length=0.05, angle=90, code=2)# same, but for moderate scenario
 mm <- 3
-# --- PANEL C --- ctrl-WW detected infections
+# --- PANEL C --- ctrl-WW perceived infections
 par(mai=c(.4,.8,.5,.02))
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,180), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -456,7 +456,7 @@ mtext(side=3, text=panel_labels[3], line=0, cex=1, adj=0);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -465,7 +465,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(1.5,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,15,"Exogenous infections")
-#legend(0, 112, legend=c("detected infections with wastewater surv.","Actual infections with wastewater surv.","detected infections with traditional surv.","Actual infections with traditional surv."),
+#legend(0, 112, legend=c("perceived infections with wastewater surv.","Actual infections with wastewater surv.","perceived infections with traditional surv.","Actual infections with traditional surv."),
 #       lty=c(1,2,1,2), col=plot_colors[c(2,2,5,5)], lwd=1.5, bty="n")
 # --- PANEL D --- plot of breakdown of isolation unit individuals
 par(mai=c(.4,.32,.5,.5))
@@ -499,7 +499,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+9,idx_to_plot[ii]+15,idx_to_plot[ii]+15,idx_to_plot[ii]+9)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -535,7 +535,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"],
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]-15,idx_to_plot[ii]-9,idx_to_plot[ii]-9,idx_to_plot[ii]-15)],
             y=c(model_out[[mm+1]][idx,"Symptoms"],model_out[[mm+1]][idx,"Symptoms"],0,0),
@@ -555,7 +555,7 @@ for (ii in 1:length(days_to_plot)) {
 }
 # same, but for severe scenario
 mm <- 5
-# --- PANEL E --- ctrl-WW detected infections
+# --- PANEL E --- ctrl-WW perceived infections
 par(mai=c(.5,.8,.4,.02))
 plot(days, model_out[[mm]][,"False Positive"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
      type='l', lwd=1.5, lty=5, col=plot_colors[1], ylim=c(0,900), xlab="", ylab="", xaxs='i', yaxs='i', main="")
@@ -566,7 +566,7 @@ mtext(side=3, text=panel_labels[5], line=0, cex=1, adj=0);
 # ctrl-WW actual infections
 lines(days, model_out[[mm]][,"Asympt"]+model_out[[mm]][,"True Positive"]+model_out[[mm]][,"Symptoms"],
       type='l', lwd=1.5, lty=1, col=plot_colors[1])
-# ctrl-trad detected infections
+# ctrl-trad perceived infections
 lines(days, model_out[[mm+1]][,"False Positive"]+model_out[[mm+1]][,"True Positive"]+model_out[[mm+1]][,"Symptoms"],
       type='l', lwd=1.5, lty=5, col=plot_colors[5])
 # ctrl-trad actual infections
@@ -575,7 +575,7 @@ lines(days, model_out[[mm+1]][,"Asympt"]+model_out[[mm+1]][,"True Positive"]+mod
 # add points for exogenous shocks
 points(days[which(model_out[[mm]][,"Superspreader Event"]==1)],rep(7.5,sum(model_out[[mm]][,"Superspreader Event"])),pch=17,col="darkorange",cex=1.5)
 text(65,75,"Exogenous infections")
-#legend(0, 112, legend=c("detected infections with wastewater surv.","Actual infections with wastewater surv.","detected infections with traditional surv.","Actual infections with traditional surv."),
+#legend(0, 112, legend=c("perceived infections with wastewater surv.","Actual infections with wastewater surv.","perceived infections with traditional surv.","Actual infections with traditional surv."),
 #       lty=c(1,2,1,2), col=plot_colors[c(2,2,5,5)], lwd=1.5, bty="n")
 # --- PANEL F --- plot of breakdown of isolation unit individuals
 par(mai=c(.5,.32,.4,.5))
@@ -609,7 +609,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"],
                 model_out[[mm]][idx,"Symptoms"]+model_out[[mm]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]+9,idx_to_plot[ii]+15,idx_to_plot[ii]+15,idx_to_plot[ii]+9)],
             y=c(model_out[[mm]][idx,"Symptoms"],model_out[[mm]][idx,"Symptoms"],0,0),
@@ -645,7 +645,7 @@ for (ii in 1:length(days_to_plot)) {
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"],
                 model_out[[mm+1]][idx,"Symptoms"]+model_out[[mm+1]][idx,"True Positive"]),
             col=plot_colors[4], border=NA)
-    ## DETECTED infections
+    ## PERCEIVED infections
     # Symptomatic
     polygon(x=days_extended[c(idx_to_plot[ii]-15,idx_to_plot[ii]-9,idx_to_plot[ii]-9,idx_to_plot[ii]-15)],
             y=c(model_out[[mm+1]][idx,"Symptoms"],model_out[[mm+1]][idx,"Symptoms"],0,0),

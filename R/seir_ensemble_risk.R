@@ -345,7 +345,7 @@ for (i_failure in idx_failure_cases_reorder) {
     mtext(side=3, text=panel_labels[cnt], line=0, cex=.9, adj=0)
     axis(1, at=1:length(frequency_of_screening_wastewater), labels=frequency_of_screening_wastewater, cex.axis=1.3)
     axis(2, at=seq(0,1,by=0.2), cex.axis=1.3)
-    if (cnt==2) {legend(0.45,1.06, c("Using detected infections only","Using actual infections"), col=c("gray30","darkorange"), pch=c(15,15), bty="n", cex=1)}
+    if (cnt==2) {legend(0.45,1.06, c("Using perceived infections only","Using actual infections"), col=c("gray30","darkorange"), pch=c(15,15), bty="n", cex=1)}
 }
 dev.off()
 
